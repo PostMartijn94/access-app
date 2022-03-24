@@ -6,7 +6,7 @@
 
     $: title = ['Reden', 'Datum', 'Tijd', 'Kenteken'][$page -1]
     $: if ($page === 0) goto('/')
-    $: if ($page === 4) {
+    $: if ($page === 5) {
         // save access request
         $page = 1
         goto('/')
