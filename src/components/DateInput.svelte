@@ -1,0 +1,21 @@
+<script lang="ts">
+    import { nl } from '../localize';
+    import { accessRequest } from '../stores';
+    import SveltyPicker from 'svelty-picker';
+    import { config } from 'svelty-picker';
+    import { fade } from "svelte/transition";
+
+    // set new locale
+    config.i18n = nl
+    config.todayBtn = false;
+</script>
+
+<div class="flex my-8 justify-center" in:fade>
+    <SveltyPicker
+            mode="date"
+            startDate={$accessRequest.date}
+            format="dd-MM-yyyy"
+            bind:value={$accessRequest.date}
+            inputClasses="cursor-pointer bg-transparent text-center content-fit text-3xl"
+    />
+</div>
