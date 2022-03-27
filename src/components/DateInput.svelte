@@ -1,9 +1,11 @@
 <script lang="ts">
     import { nl } from '../localize';
-    import { accessRequest } from '../stores';
+    import {accessRequest, showNext} from '../stores';
     import SveltyPicker from 'svelty-picker';
     import { config } from 'svelty-picker';
     import { fade } from "svelte/transition";
+
+    $showNext = true
 
     // set new locale
     config.i18n = nl

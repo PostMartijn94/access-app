@@ -2,8 +2,8 @@
     import { accessRequest, page } from "../stores";
 </script>
 
-<div class="mt-8">
-    <ul class="p-4 rounded">
+<div class="my-8">
+    <ul class="px-4 rounded">
         <li on:click={() => $page = 2} class="cursor-pointer">
             Reden: {$accessRequest.reason}
         </li>

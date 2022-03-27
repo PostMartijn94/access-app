@@ -2,9 +2,8 @@
     import Card from '../components/layouts/Card.svelte';
     import AccessForm from "../components/AccessForm.svelte";
     import { goto } from "$app/navigation";
-    import {page, back, next, accessRequests, accessRequest} from "../stores";
-    import {onMount} from "svelte";
-
+    import { page, back, next, showNext, accessRequests, accessRequest } from "../stores";
+    import { onMount } from "svelte";
 
     onMount(() => $page = 1)
 
@@ -25,8 +24,10 @@
 
     <AccessForm />
 
-    <div slot="button-bar">
-        <button class="mx-8 hover:text-white cursor-pointer" on:click={back}>Back</button>
-        <button class="mx-8 hover:text-white cursor-pointer" on:click={next}>{nextButtonText}</button>
+    <div slot="nav">
+        <button class="absolute left-0 mx-8 hover:text-white cursor-pointer" on:click={back}>Back</button>
+        {#if $showNext}
+            <button class="absolute right-0 mx-8 hover:text-white cursor-pointer" on:click={next}>{nextButtonText}</button>
+        {/if}
     </div>
 </Card>

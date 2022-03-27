@@ -1,5 +1,9 @@
 <script lang="ts">
     import { fade } from "svelte/transition";
+    import { showNext } from "../stores";
+    import {onMount} from "svelte";
+
+    onMount(() => setTimeout(() => $showNext = true, 3000))
 </script>
 
 <div class="flex my-4" in:fade={{duration:300}}>

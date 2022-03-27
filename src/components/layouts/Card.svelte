@@ -9,9 +9,11 @@
 
     <slot></slot>
 
-    <hr class="mt-4">
+    <!--{#if $$slots.nav}-->
+        <hr class="mt-4">
 
-    <div class="flex mt-4 justify-around">
-        <slot name="button-bar"></slot>
-    </div>
+        <div class="relative py-4">
+            <slot name="nav"></slot>
+        </div>
+    <!--{/if}-->
 </card>

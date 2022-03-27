@@ -1,9 +1,16 @@
 <script lang="ts">
-    import { accessRequest } from "../stores";
-    import { slide, fade } from "svelte/transition";
+    import { accessRequest, showNext } from "../stores";
+    import { slide } from "svelte/transition";
+
+    import { requiredValidator } from '../validators';
+    import { createFieldValidator } from '../validation';
+
+    const [ validity, validate ] = createFieldValidator(requiredValidator())
+
+    const validatorHandler = (isValid) => $showNext = isValid
 
     const addItem = () => $accessRequest.licences = [...$accessRequest.licences, {
-        id: $accessRequest.licences.length,
+        id: Math.round(Math.random() * 10000),
         plate: '',
         trailer: false
     }]
@@ -12,16 +19,30 @@
 </script>
 
 <div class="flex flex-col my-8">
-    {#each $accessRequest.licences as licence, i (i)}
-        <div class="flex mb-4 justify-between" transition:slide >
-            <input type="text" bind:value={$accessRequest.licences[i].plate} class="border-b bg-transparent text-2xl w-28">
+    {#each $accessRequest.licences as { id, plate, trailer }, i (id)}
+        <div class="flex mb-4 justify-between" in:slide >
+            <input type="text"
+                   bind:value={$accessRequest.licences[i].plate}
+                   on:change={() => validatorHandler($validity.valid)}
+                   class="border-b bg-transparent text-2xl w-28"
+                   use:validate={$accessRequest.licences[i].plate}
+            >
             <label class="inline-flex items-center mt-4 ml-4">
-                <input type="checkbox" bind:value={$accessRequest.licences[i].trailer} class="form-checkbox h-5 w-5 text-orange-600"><span class="ml-2 text-gray-200">Aanhanger</span>
+                <input type="checkbox" bind:value={$accessRequest.licences[i].trailer} checked={$accessRequest.licences[i].trailer} class="form-checkbox h-5 w-5 text-orange-600"><span class="ml-2 text-gray-200">Aanhanger</span>
+                {#if $accessRequest.licences.length > 1}
+                <button on:click={() => removeItem(id)} class="relative ml-4 text-red-600">x</button>
+                {/if}
             </label>
-            <button on:click={() => removeItem(licence.id)} class="text-white mx-4 bg-red-600 p-2 py-1 rounded-full">x</button>
         </div>
     {/each}
-    {#if $accessRequest.licences.length < 3}
+
+    {#if $accessRequest.licences.length < 3 && $validity.valid}
         <button on:click={addItem} class="mt-10 text-gray-800 bg-white rounded-full mx-auto px-3 py-1">+</button>
+    {/if}
+
+    {#if $validity.dirty && !$validity.valid}
+        <span class="text-red-500 font-thin italic">
+            {$validity.message}
+        </span>
     {/if}
 </div>

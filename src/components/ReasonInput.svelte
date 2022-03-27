@@ -1,7 +1,9 @@
 <script lang="ts">
-    import { page, accessRequest, reasonOptions} from "../stores";
+    import { page, accessRequest, reasonOptions, showNext } from "../stores";
     import { slide } from "svelte/transition";
+    import { onMount } from "svelte";
 
+    onMount(() => $showNext = !!$accessRequest.reason)
     const setReason = (option) => {
         $accessRequest.reason = option
         $page += 1

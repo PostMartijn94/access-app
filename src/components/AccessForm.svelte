@@ -12,5 +12,5 @@
 </script>
 
 <div>
-    <svelte:component this={selectedComponent}/>
+    <svelte:component this={selectedComponent} />
 </div>

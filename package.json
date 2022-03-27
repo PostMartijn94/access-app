@@ -33,6 +33,7 @@
   },
   "type": "module",
   "dependencies": {
+    "license-plate": "^2.0.0",
     "svelty-picker": "^1.2.4"
   }
 }

@@ -4,6 +4,7 @@ export const page = writable(1);
 
 export const back = () => page.update(n => n -= 1)
 export const next = () => page.update(n => n += 1)
+export const showNext = writable(false)
 
 export const reasonOptions = readable([
     'Laden/Lossen',
@@ -13,13 +14,13 @@ export const reasonOptions = readable([
 
 export const accessRequest = writable({
     reason: null,
-    date: Date().toLocaleString(),
+    date: (new Date(Date.now())).toLocaleDateString(),
     time: {
         from: '07:00',
         to: '20:00'
     },
     licences: [
-        {id: 0, plate: '51-LT-DT', trailer: false}
+        {id: 0, plate: '', trailer: false}
     ]
 })
 

@@ -1,7 +1,8 @@
 <script lang="ts">
-
+    import Navbar from "../components/Navbar.svelte";
 </script>
 
+<Navbar />
 <main class="flex items-center justify-center">
     <slot></slot>
 </main>
