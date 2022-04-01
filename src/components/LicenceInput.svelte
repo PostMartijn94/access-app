@@ -10,7 +10,7 @@
     const validatorHandler = (isValid) => $showNext = isValid
 
     const addItem = () => $accessRequest.licences = [...$accessRequest.licences, {
-        id: Math.round(Math.random() * 10000),
+        id: crypto.randomUUID(),
         plate: '',
         trailer: false
     }]

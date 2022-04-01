@@ -16,8 +16,9 @@
     <SveltyPicker
             mode="date"
             startDate={$accessRequest.date}
-            format="dd-MM-yyyy"
+            format="dd/mm/yyyy"
             bind:value={$accessRequest.date}
             inputClasses="cursor-pointer bg-transparent text-center content-fit text-3xl"
+            on:change={(e) => console.log(e.detail)}
     />
 </div>

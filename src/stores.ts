@@ -1,4 +1,5 @@
-import {writable, readable} from 'svelte/store';
+import {writable, readable, derived} from 'svelte/store';
+import type IAccessRequest from "./types/IAccessRequest";
 
 export const page = writable(1);
 
@@ -12,7 +13,8 @@ export const reasonOptions = readable([
     'Bezoek',
 ])
 
-export const accessRequest = writable({
+const defaultAccessRequest = {
+    id: null,
     reason: null,
     date: (new Date(Date.now())).toLocaleDateString(),
     time: {
@@ -20,18 +22,12 @@ export const accessRequest = writable({
         to: '20:00'
     },
     licences: [
-        {id: 0, plate: '', trailer: false}
+        {id: '001', plate: '', trailer: false}
     ]
-})
+} as IAccessRequest
 
-export const accessRequests = writable([{
-    reason: 'Verhuizen',
-    date: '01-06-2022',
-    time: {
-        from: '09:00',
-        to: '21:00'
-    },
-    licences: [
-        {id: 0, plate: '51-LT-DT', trailer: true}
-    ]
-}])
+export const accessRequest = writable(defaultAccessRequest);
+
+export const resetAccessRequest = () => accessRequest.set(defaultAccessRequest)
+
+export const accessRequests = writable([defaultAccessRequest])

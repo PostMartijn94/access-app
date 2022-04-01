@@ -9,11 +9,11 @@
 
     <slot></slot>
 
-    <!--{#if $$slots.nav}-->
+    {#if $$slots.nav}
         <hr class="mt-4">
 
         <div class="relative py-4">
             <slot name="nav"></slot>
         </div>
-    <!--{/if}-->
+    {/if}
 </card>

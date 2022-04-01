@@ -5,26 +5,34 @@
 
     let licencePlate: string
     let code: string
+    let error: string
 
     const checkLicence = () => {
         const ar = $accessRequests.find((rq) => !!rq.licences.find((l) => l.plate === licencePlate))
-        if (ar) generateCode()
-        console.log(code)
+        if (ar) {
+            generateCode()
+        } else {
+            error = `Invalid access request for ${licencePlate}`
+        }
     }
 
     const generateCode = () => code = Math.floor(1000 + Math.random() * 9000).toString();
-
 </script>
 
 <Card>
     <div slot="title">Get code</div>
     {#if !code}
-        <div class="flex justify-center mb-4 items-baseline space-x-4 my-8">
-            <input type="text" id="licencePlate" bind:value={licencePlate} class="border-b bg-transparent text-2xl w-28">
-            <button class="w-fit px-4 hover:bg-transparent bg-gray-600 delay-75 duration-100 text-white text-sm font-bold rounded-2xl w-full py-3 mt-7 border-b-4 border border-b-white-600"
-                    on:click={checkLicence}>
-                Check
-            </button>
+        <div class="flex flex-col">
+            {#if error}
+                <p class="flex mt-4 justify-center text-red-600">{error}</p>
+            {/if}
+            <div class="flex justify-center mb-4 items-baseline space-x-4 my-8">
+                <input type="text" id="licencePlate" bind:value={licencePlate} class="border-b bg-transparent text-2xl w-28">
+                <button class="w-fit px-4 hover:bg-transparent bg-gray-600 delay-75 duration-100 text-white text-sm font-bold rounded-2xl w-full py-3 mt-7 border-b-4 border border-b-white-600"
+                        on:click={checkLicence}>
+                    Check
+                </button>
+            </div>
         </div>
     {:else}
         <div class="flex justify-center my-8">

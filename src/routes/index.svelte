@@ -1,24 +1,12 @@
 <script lang="ts">
     import Card from "../components/layouts/Card.svelte";
     import { goto } from "$app/navigation";
-    import { page, accessRequest } from "../stores";
-    import {now} from "svelte/internal";
+    import { page, resetAccessRequest } from "../stores";
+    import {onMount} from "svelte";
 
     $page === 1
 
-    console.log((new Date(Date.now())).toLocaleDateString())
-
-    $accessRequest = {
-        reason: null,
-        date: (new Date(Date.now())).toLocaleDateString(),
-        time: {
-            from: '07:00',
-            to: '20:00'
-        },
-        licences: [
-            {id: 0, plate: '', trailer: false}
-        ]
-    }
+    onMount(() => resetAccessRequest())
 </script>
 
 <Card>

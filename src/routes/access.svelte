@@ -13,6 +13,7 @@
     $: if ($page === 0) goto('/')
 
     $: if ($page > 6) {
+        $accessRequest.id = crypto.randomUUID()
         $accessRequests.push($accessRequest)
         $page = 1
         goto('/')
